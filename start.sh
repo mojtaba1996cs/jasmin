@@ -1,13 +1,15 @@
-#!/bin/bash
-
-
-chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+#!/bin/sh
 
 
 echo "Running migrations..."
 php artisan migrate --force
 
 
-echo "Starting Apache..."
-apache2-foreground
+echo "Caching configuration..."
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+
+echo "Starting PHP-FPM..."
+exec php-fpm
