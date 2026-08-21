@@ -14,7 +14,7 @@ RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --ignor
 
 COPY . .
 
-RUN composer dump-autoload --optimize --no-dev --classmap-authoritative
+RUN composer dump-autoload --optimize --no-dev --classmap-authoritative --ignore-platform-reqs
 
 FROM php:8.2-fpm-alpine
 

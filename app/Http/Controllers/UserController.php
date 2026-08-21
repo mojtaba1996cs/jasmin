@@ -50,8 +50,8 @@ $user->save();
         $user = User::findOrFail($id);
         $getdocum = $user->documents()->where('status',['pending','received'])->get();
         foreach ($getdocum as $doc) {
-            if($doc->file_path && \Storage::disk('public')->exists($doc->file_path)){
-                \Storage::disk('public')->delete($doc->file_path);
+            if($doc->file_path && \Storage::disk('supabase')->exists($doc->file_path)){
+                \Storage::disk('supabase')->delete($doc->file_path);
             }
             $doc->delete();
         }

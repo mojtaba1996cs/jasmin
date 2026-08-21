@@ -30,7 +30,7 @@ $url = Storage::disk('supabase')->url($path);
         'doc_number' => $request->doc_number,
 
         // 🔥 دي أهم نقطة
-        'from_office_id' => Auth::user()->office_id,
+        'from_office_id' => Auth::User()->office_id,
 
         'to_office_id' => $request->to_office_id,
         'created_by' => Auth::id(),
@@ -42,7 +42,7 @@ $url = Storage::disk('supabase')->url($path);
 
 public function incoming()
 {
-    $user = Auth::user();
+    $user = Auth::User();
 
     if ($user->role_id == 1) {
         // المدير يشوف الكل
