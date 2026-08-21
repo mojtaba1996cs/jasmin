@@ -12,6 +12,7 @@ COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --ignore-platform-reqs
 
 
+
 FROM php:8.2-fpm-alpine
 
 
