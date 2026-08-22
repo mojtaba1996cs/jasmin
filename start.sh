@@ -1,12 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
 
-echo "Caching configuration..."
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 
+echo "Running migrations..."
+php artisan migrate --force
 
-echo "Starting Laravel Server..."
-exec php artisan serve --host=0.0.0.0 --port=80
+
+echo "Starting Apache..."
+apache2-foreground
