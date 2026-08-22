@@ -14,12 +14,16 @@ COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --ignore-platform-reqs
 
 
+
 FROM php:8.2-fpm-alpine
 
-RUN apk add --no-cache postgresql-libs \
-    && docker-php-ext-install pdo_pgsql pdo_mysql bcmath opcache
+RUN apk add --no-cache postgresql-dev \
+    && docker-php-ext-install pdo_pgsql pdo_mysql bcmath opcache \
+    && apk del postgresql-dev \
+    && apk add --no-cache postgresql-libs
 
 WORKDIR /var/www/html
+
 COPY --from=vendor /app .
 
 RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
