@@ -1,10 +1,16 @@
 # المرحلة الأولى: بناء المكتبات (Build Stage)
 FROM php:8.2-fpm-alpine as vendor
+
+# تثبيت أدوات النظام الضرورية
 RUN apk add --no-cache git unzip zip postgresql-dev
-RUN docker-php-ext-install pdo_pgsql pdo_mysql bcmath
+
+# --- السطر الأهم: جلب أداة الملحن (Composer) ---
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 COPY composer.json composer.lock ./
+
+# تثبيت المكتبات مع تجاهل القيود
 RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --ignore-platform-reqs
 
 # المرحلة الثانية: الصورة النهائية (Production Stage)
@@ -18,13 +24,11 @@ RUN apk add --no-cache postgresql-dev libpq \
 
 WORKDIR /var/www/html
 
-# نسخ كافة ملفات المشروع مباشرة من المستودع (GitHub) لضمان وجود 'artisan'
+# نسخ كافة ملفات المشروع ومجلد المكتبات
 COPY . .
-
-# نسخ مجلد 'vendor' فقط من مرحلة البناء الأولى
 COPY --from=vendor /app/vendor ./vendor
 
-# تحسين الأداء (أوامر Artisan ستعمل الآن لأن الملف موجود في المجلد الحالي)
+# تحسين الأداء (أوامر Artisan)
 RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
 
 # ضبط الصلاحيات
