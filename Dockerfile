@@ -26,7 +26,7 @@ WORKDIR /var/www/html
 
 COPY --from=vendor /app .
 
-RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
+
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
