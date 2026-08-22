@@ -20,8 +20,9 @@ class DocumentController extends Controller
         'to_office_id' => 'required'
     ]);
 
-$path = $request->file('file')->store('uploads', 'supabase');
+$path = $request->file('document')->store('uploads', 'supabase');
 $url = Storage::disk('supabase')->url($path);
+
 
     Document::create([
         'title' => $request->title,
