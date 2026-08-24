@@ -35,6 +35,6 @@ public function creator()
 }
     public function getFileUrlAttribute()
 {
-    return rtrim(env('SUPABASE_PROJECT_URL'), '/') . '/storage/v1/object/public/documents/' . $this->file_path;
+    return rtrim(env('SUPABASE_ENDPOINT'), '/') . '/storage/v1/object/public/documents/' . $this->file_path;
 }
 }
