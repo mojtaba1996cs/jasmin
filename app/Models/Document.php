@@ -39,9 +39,9 @@ public function creator()
             return null;
         }
 
-        $baseUrl = rtrim(config('SUPABASE_ENDPOINT'), '/');
+        $baseUrl = rtrim(env('SUPABASE_ENDPOINT'), '/');
         $bucket = 'documents';
 
-        return "{$baseUrl}/storage/v1/object/public/{$bucket}/{$this->file_path}";
+        return "{$baseUrl}/storage/v1/s3/object/public/{$bucket}/{$this->file_path}";
     }
 }
