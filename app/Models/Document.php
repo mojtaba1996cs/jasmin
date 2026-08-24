@@ -33,4 +33,8 @@ public function creator()
 {
     return $this->belongsTo(\App\Models\User::class, 'created_by');
 }
+    public function getFileUrlAttribute()
+{
+    return rtrim(env('SUPABASE_PROJECT_URL'), '/') . '/storage/v1/object/public/documents/' . $this->file_path;
+}
 }
