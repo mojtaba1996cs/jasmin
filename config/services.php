@@ -17,7 +17,9 @@ return [
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],
-
+  'supabase' => [
+    'url' => env('SUPABASE_ENDPOINT'),
+],
     'resend' => [
         'key' => env('RESEND_API_KEY'),
     ],
