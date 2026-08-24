@@ -44,7 +44,7 @@ $path = $request->file('file')->store('uploads', 'supabase');
 
 public function incoming()
 {
-    $user = Auth::User();
+    $user = Auth::user();
 
     if ($user->role_id == 1) {
         // المدير يشوف الكل
