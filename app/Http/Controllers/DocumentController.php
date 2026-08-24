@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ $url = Storage::disk('supabase')->url($path);
         'doc_number' => $request->doc_number,
 
         // 🔥 دي أهم نقطة
-        'from_office_id' => Auth::User()->office_id,
+        'from_office_id' => Auth::user()->office_id,
 
         'to_office_id' => $request->to_office_id,
         'created_by' => Auth::id(),
