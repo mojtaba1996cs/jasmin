@@ -126,7 +126,7 @@
             <i class="fas fa-file-pdf"></i>
             <p>{{ basename($document->file_path) }}</p>
             <div>
-                <a href="{{ $document->file_path }}" class="btn btn-primary" target="_blank"><i class="fas fa-download"></i> تحميل</a>
+                <a href="{{ $document->file_url }}" class="btn btn-primary" target="_blank"><i class="fas fa-download"></i> تحميل</a>
             
             </div>
         </div>
