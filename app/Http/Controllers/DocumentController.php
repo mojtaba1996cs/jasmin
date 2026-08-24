@@ -22,12 +22,12 @@ class DocumentController extends Controller
     ]);
 
 $path = $request->file('file')->store('uploads', 'supabase');
-$url = Storage::disk('supabase')->url($path);
+//$url = Storage::disk('supabase')->url($path);
 
 
     Document::create([
         'title' => $request->title,
-        'file_path' => $url,
+        'file_path' => $path,
         'description' => $request->description,
         'doc_number' => $request->doc_number,
 
