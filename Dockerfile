@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM php:8.4-fpm
 
 # تثبيت الحزم المطلوبة
 RUN apt-get update && apt-get install -y \
